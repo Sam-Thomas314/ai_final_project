@@ -15,10 +15,12 @@ def self_analyzer():
     sadness = response['sadness']
     dominant_emotion = response['dominant_emotion']
 
-    if(anger == None):
+    if anger is None:
         return "Invalid text! Please try again"
-    else:
-        return "For the given statement, the system response is anger {}, disgust {}, fear {}, joy {}, and sadness {}. The dominanty emotion is {}.".format(anger, disgust, fear, joy, sadness, dominant_emotion)
+    
+    return """For the given statement, the system response is anger {}, disgust {},
+            fear {}, joy {}, and sadness {}. The dominanty emotion is {}.""".format(anger,
+            disgust, fear, joy, sadness, dominant_emotion)
 
 @app.route("/")
 def render_index_page():
@@ -26,9 +28,3 @@ def render_index_page():
 
 if __name__ == "__main__":
     app.run(host = "0.0.0.0", port=5000)
-
-
-
-
-    
-
