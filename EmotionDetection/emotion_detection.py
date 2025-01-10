@@ -10,23 +10,35 @@ def emotion_detector(text_to_analyze):
     formatted_response = json.loads(response.text)
 
     score_dictionary = {}
-    anger_score = formatted_response['emotionPredictions'][0]['emotion']['anger']
-    disgust_score  = formatted_response['emotionPredictions'][0]['emotion']['disgust']
-    fear_score  = formatted_response['emotionPredictions'][0]['emotion']['fear']
-    joy_score  = formatted_response['emotionPredictions'][0]['emotion']['joy']
-    sadness_score  = formatted_response['emotionPredictions'][0]['emotion']['sadness']
-
-
+  
     if response.status_code == 400:
-        score_dictionary["anger"] = None
-        score_dictionary["disgust"] = None
-        score_dictionary["fear"] = None
-        score_dictionary["joy"] = None
-        score_dictionary["sadness"] = None
-    elif response.status_code == 200 
+        anger_score = None
+        disgust_score = None
+        fear_score = None
+        joy_score = None
+        sadness_score = None
+        dominant_emotion = None
 
-    dominant_emotion = max(score_dictionary, key=score_dictionary.get)
+        score_dictionary["anger"] = anger_score
+        score_dictionary["disgust"] = disgust_score
+        score_dictionary["fear"] = fear_score
+        score_dictionary["joy"] = joy_score
+        score_dictionary["sadness"] = sadness_score
+        score_dictionary["dominant_emotion"] = dominant_emotion
+    else:
+        dominant_emotion = max(score_dictionary, key=score_dictionary.get)
 
+        anger_score = formatted_response['emotionPredictions'][0]['emotion']['anger']
+        disgust_score  = formatted_response['emotionPredictions'][0]['emotion']['disgust']
+        fear_score  = formatted_response['emotionPredictions'][0]['emotion']['fear']
+        joy_score  = formatted_response['emotionPredictions'][0]['emotion']['joy']
+        sadness_score  = formatted_response['emotionPredictions'][0]['emotion']['sadness']
+
+        score_dictionary["anger"] = anger_score
+        score_dictionary["disgust"] = disgust_score
+        score_dictionary["fear"] = fear_score
+        score_dictionary["joy"] = joy_score
+        score_dictionary["sadness"] = sadness_score
 
     return {
         'anger': anger_score,
